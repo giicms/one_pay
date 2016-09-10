@@ -1,0 +1,20 @@
+{
+    "name": "giicms/one_pay",
+    "description": "Integrated payment in laravel simple onepay",
+    "authors": [
+        {
+            "name": "Vinh Huynh Tu",
+            "homepage": "http://giicms.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "giicms\\onepay\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
