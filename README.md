@@ -1,12 +1,16 @@
 $onepay = new Onepay(); 
 // cài đặt thông số bắt buộc 
+```
 $onepay->setupMerchant($merchant, $access, $secure); 
+```
 // $order_info bat buoc viet tieng Viet, khong dau, va it hon 30 ky tu, nen dung order_id. 
+```
 $refer = $onepay->build_link($order_id, $total_amount, $order_info, $url_return); 
+```
 // Chuyển trang
 
 
-
+```
 $onepay = new Onepay(); 
 // cài đặt thông số bắt buộc 
 $onepay->setupMerchant($merchant, $access, $secure); 
@@ -41,3 +45,4 @@ if($hashValidated=="CORRECT" && $txnResponseCode=="0"){
     $transStatus = 3; 
 } 
 // code xu ly cua ban
+```
