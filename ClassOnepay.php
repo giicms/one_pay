@@ -5,7 +5,7 @@ class ClassOnepay
 {
 	//private $onepay_url = 'http://mtf.onepay.vn/onecomm-pay/vpc.op';
 	// link that thanh toan noi dia
-	private $onepay_url = 'https://onepay.vn/onecomm-pay/vpc.op';
+	private $onepay_url = 'https://mtf.onepay.vn/onecomm-pay/vpc.op';
 	
 	// Get and URL Encode the AgainLink. Add the AgainLink to the array
 	// Shows how a user field (such as application SessionIDs) could be added
@@ -34,7 +34,7 @@ class ClassOnepay
 		// sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
 		// arrange array data a-z before make a hash
 		
-		$mang = array
+		$array = array
 		(
 			'Title' => 'VPC 3-Party',
 			'vpc_Merchant' => $this->merchant,
@@ -48,9 +48,9 @@ class ClassOnepay
 			'vpc_Locale' => 'vn',
 			'vpc_Currency' => 'VND'
 		);
-		ksort($mang);
+		ksort($array);
 		$vpcURL = '';
-		foreach($mang as $key => $value)
+		foreach($array as $key => $value)
 		{
 			$vpcURL .= '&' . urlencode($key) . "=" . urlencode($value);
 			$md5HashData .= $value;
