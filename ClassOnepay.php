@@ -6,6 +6,7 @@ class ClassOnepay
 	//private $onepay_url = 'http://mtf.onepay.vn/onecomm-pay/vpc.op';
 	// link that thanh toan noi dia
 	private $onepay_url = 'https://mtf.onepay.vn/onecomm-pay/vpc.op';
+	private $onepay_url_international = 'https://mtf.onepay.vn/vpcpay/vpcpay.op';
 	
 	// Get and URL Encode the AgainLink. Add the AgainLink to the array
 	// Shows how a user field (such as application SessionIDs) could be added
@@ -27,7 +28,7 @@ class ClassOnepay
 		$this->access = $access;
 		$this->secure = $secure;
 	}
-	public function build_link($order_id, $total_amount, $order_info, $url_return)
+	public function build_link($order_id, $total_amount, $order_info, $url_return, $country)
 	{
 		// tạo chuỗi dữ liệu được bắt đầu bằng khóa bí mật
 		$md5HashData = $this->secure;
@@ -56,6 +57,7 @@ class ClassOnepay
 			$md5HashData .= $value;
 		}
 		$vpcURL = ltrim($vpcURL, '&');
+	
 		$vpcURL = $this->onepay_url . '?' . $vpcURL;
 		if( strlen($this->secure) > 0)
 		{
