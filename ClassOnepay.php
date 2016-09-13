@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @link http://www.giicms.com/
  * @copyright Copyright (c) 2015 Giicms.,ltd
  * @license https://github.com/giicms/one_pay/blob/master/LICENSE
  * @author Vinh Huynh <huynhtuvinh87@gmail.com>
  */
+
 namespace giicms\onepay;
 
 class ClassOnepay {
@@ -69,7 +71,7 @@ class ClassOnepay {
         if (strlen($this->secure) > 0) {
             $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
         }
-        return '<iframe name="myframe" src="' . $vpcURL . '" height="500" width="60%"></iframe>';
+        return $vpcURL;
     }
 
     public function build_link($order_id, $total_amount, $order_info, $url_return) {
@@ -104,7 +106,7 @@ class ClassOnepay {
         if (strlen($this->secure) > 0) {
             $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
         }
-        return '<iframe name="myframe" src="' . $vpcURL . '" height="500" width="60%"></iframe>';
+        return $vpcURL;
     }
 
     public function validate($mang) {
@@ -214,10 +216,5 @@ class ClassOnepay {
         }
     }
 
-    //  ----------------------------------------------------------------------------
-
-    public function iframe($url) {
-        return '<iframe name="myframe" src="' . $url . '" height="800" width="100%">Your browser does not support frames.</iframe>';
-    }
 
 }
