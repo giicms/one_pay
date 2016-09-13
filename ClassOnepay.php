@@ -27,16 +27,10 @@ class ClassOnepay {
 
     // function cài đặt cac bien private trong class
 
-    public function setupMerchant() {
-        $this->merchant = 'TESTONEPAY';
-        $this->access = '6BEB2546';
-        $this->secure = '6D0870CDE5F24F34F3915FB0045120DB';
-    }
-
-    public function setupMerchantVn() {
-        $this->merchant = 'ONEPAY';
-        $this->access = 'D67342C2';
-        $this->secure = 'A3EFDFABA8653DF2342E8DAC29B51AF0';
+    public function setupMerchant($merchant, $access, $secure) {
+        $this->merchant = $merchant;
+        $this->access = $access;
+        $this->secure = $secure;
     }
 
     public function build_link_vn($order_id, $total_amount, $order_info, $url_return) {
@@ -215,6 +209,5 @@ class ClassOnepay {
             return $data;
         }
     }
-
 
 }
