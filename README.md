@@ -1,4 +1,17 @@
+## Installation
+
+The preferred way to install this extension is through composer.
+
+Either run
+
+composer require "giicms/one_pay" "dev-master"
+or add
+
+"giicms/one_pay": "dev-master"
+to the require section of your application's composer.json file.
+
 $onepay = new Onepay(); 
+
 // cài đặt thông số bắt buộc 
 ```
 $onepay->setupMerchant($merchant, $access, $secure); 
