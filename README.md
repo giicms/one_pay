@@ -4,9 +4,15 @@ $onepay = new Onepay();
 $onepay->setupMerchant($merchant, $access, $secure); 
 ```
 // $order_info bat buoc viet tieng Viet, khong dau, va it hon 30 ky tu, nen dung order_id. 
+// Noi dia
 ```
 $refer = $onepay->build_link($order_id, $total_amount, $order_info, $url_return); 
 ```
+// Quoc te
+```
+$refer = $onepay->build_link_int($order_id, $total_amount, $order_info, $url_return); 
+```
+
 // Chuyển trang
 
 
