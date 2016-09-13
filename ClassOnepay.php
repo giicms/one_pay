@@ -69,7 +69,7 @@ class ClassOnepay {
         if (strlen($this->secure) > 0) {
             $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
         }
-        return '<iframe name="myframe" src="' . $vpcURL . '" height="800" width="100%"></iframe>';
+        return '<iframe name="myframe" src="' . $vpcURL . '" height="500" width="60%"></iframe>';
     }
 
     public function build_link($order_id, $total_amount, $order_info, $url_return) {
@@ -104,7 +104,7 @@ class ClassOnepay {
         if (strlen($this->secure) > 0) {
             $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
         }
-        return '<iframe name="myframe" src="' . $vpcURL . '" height="800" width="100%"></iframe>';
+        return '<iframe name="myframe" src="' . $vpcURL . '" height="500" width="60%"></iframe>';
     }
 
     public function validate($mang) {
