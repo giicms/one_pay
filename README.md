@@ -23,7 +23,7 @@ $refer = $onepay->build_link($order_id, $total_amount, $order_info, $url_return)
 ```
 // Quoc te
 ```
-$refer = $onepay->build_link_int($order_id, $total_amount, $order_info, $url_return); 
+$refer = $onepay->build_link_vn($order_id, $total_amount, $order_info, $url_return); 
 ```
 
 // Chuyển trang
