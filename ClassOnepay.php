@@ -12,11 +12,10 @@ namespace giicms\onepay;
 class ClassOnepay {
 
     //private $onepay_url = 'http://mtf.onepay.vn/onecomm-pay/vpc.op';
-    // link that thanh toan noi dia
+    // link thanh toan noi dia
     private $onepay_url_vn = 'https://mtf.onepay.vn/onecomm-pay/vpc.op';
+    // link thanh toan quoc te
     private $onepay_url = 'https://mtf.onepay.vn/vpcpay/vpcpay.op';
-    // Get and URL Encode the AgainLink. Add the AgainLink to the array
-    // Shows how a user field (such as application SessionIDs) could be added
     //$_POST['AgainLink']=urlencode($HTTP_REFERER);
     // Khóa bí mật - được cấp bởi OnePAY
     private $secure = '';
