@@ -1,14 +1,18 @@
-
 <?php
-
+/**
+ * @link http://www.giicms.com/
+ * @copyright Copyright (c) 2015 Giicms.,ltd
+ * @license https://github.com/giicms/one_pay/blob/master/LICENSE
+ * @author Vinh Huynh <huynhtuvinh87@gmail.com>
+ */
 namespace giicms\onepay;
 
 class ClassOnepay {
 
     //private $onepay_url = 'http://mtf.onepay.vn/onecomm-pay/vpc.op';
     // link that thanh toan noi dia
-    private $onepay_url = 'https://mtf.onepay.vn/onecomm-pay/vpc.op';
-    private $onepay_url_international = 'https://mtf.onepay.vn/vpcpay/vpcpay.op';
+    private $onepay_url_vn = 'https://mtf.onepay.vn/onecomm-pay/vpc.op';
+    private $onepay_url = 'https://mtf.onepay.vn/vpcpay/vpcpay.op';
     // Get and URL Encode the AgainLink. Add the AgainLink to the array
     // Shows how a user field (such as application SessionIDs) could be added
     //$_POST['AgainLink']=urlencode($HTTP_REFERER);
@@ -21,10 +25,51 @@ class ClassOnepay {
 
     // function cài đặt cac bien private trong class
 
-    public function setupMerchant($merchant, $access, $secure) {
-        $this->merchant = $merchant;
-        $this->access = $access;
-        $this->secure = $secure;
+    public function setupMerchant() {
+        $this->merchant = 'TESTONEPAY';
+        $this->access = '6BEB2546';
+        $this->secure = '6D0870CDE5F24F34F3915FB0045120DB';
+    }
+
+    public function setupMerchantVn() {
+        $this->merchant = 'ONEPAY';
+        $this->access = 'D67342C2';
+        $this->secure = 'A3EFDFABA8653DF2342E8DAC29B51AF0';
+    }
+
+    public function build_link_vn($order_id, $total_amount, $order_info, $url_return) {
+        // tạo chuỗi dữ liệu được bắt đầu bằng khóa bí mật
+        $md5HashData = $this->secure;
+        // sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
+        // arrange array data a-z before make a hash
+
+        $array = array
+            (
+            'Title' => 'VPC 3-Party',
+            'vpc_Merchant' => $this->merchant,
+            'vpc_AccessCode' => $this->access,
+            'vpc_MerchTxnRef' => $order_id,
+            'vpc_OrderInfo' => $order_info,
+            'vpc_Amount' => $total_amount * 100,
+            'vpc_ReturnURL' => $url_return,
+            'vpc_Version' => '2',
+            'vpc_Command' => 'pay',
+            'vpc_Locale' => 'vn',
+            'vpc_Currency' => 'VND'
+        );
+        ksort($array);
+        $vpcURL = '';
+        foreach ($array as $key => $value) {
+            $vpcURL .= '&' . urlencode($key) . "=" . urlencode($value);
+            $md5HashData .= $value;
+        }
+        $vpcURL = ltrim($vpcURL, '&');
+
+        $vpcURL = $this->onepay_url_vn . '?' . $vpcURL;
+        if (strlen($this->secure) > 0) {
+            $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
+        }
+        return '<iframe name="myframe" src="' . $vpcURL . '" height="800" width="100%"></iframe>';
     }
 
     public function build_link($order_id, $total_amount, $order_info, $url_return) {
@@ -59,42 +104,7 @@ class ClassOnepay {
         if (strlen($this->secure) > 0) {
             $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
         }
-        return $vpcURL;
-    }
-
-    public function build_link_itn($order_id, $total_amount, $order_info, $url_return) {
-        // tạo chuỗi dữ liệu được bắt đầu bằng khóa bí mật
-        $md5HashData = $this->secure;
-        // sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
-        // arrange array data a-z before make a hash
-
-        $array = array
-            (
-            'Title' => 'VPC 3-Party',
-            'vpc_Merchant' => $this->merchant,
-            'vpc_AccessCode' => $this->access,
-            'vpc_MerchTxnRef' => $order_id,
-            'vpc_OrderInfo' => $order_info,
-            'vpc_Amount' => $total_amount * 100,
-            'vpc_ReturnURL' => $url_return,
-            'vpc_Version' => '2',
-            'vpc_Command' => 'pay',
-            'vpc_Locale' => 'vn',
-            'vpc_Currency' => 'VND'
-        );
-        ksort($array);
-        $vpcURL = '';
-        foreach ($array as $key => $value) {
-            $vpcURL .= '&' . urlencode($key) . "=" . urlencode($value);
-            $md5HashData .= $value;
-        }
-        $vpcURL = ltrim($vpcURL, '&');
-
-        $vpcURL = $this->onepay_url_international . '?' . $vpcURL;
-        if (strlen($this->secure) > 0) {
-            $vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
-        }
-        return $vpcURL;
+        return '<iframe name="myframe" src="' . $vpcURL . '" height="800" width="100%"></iframe>';
     }
 
     public function validate($mang) {
@@ -205,4 +215,9 @@ class ClassOnepay {
     }
 
     //  ----------------------------------------------------------------------------
+
+    public function iframe($url) {
+        return '<iframe name="myframe" src="' . $url . '" height="800" width="100%">Your browser does not support frames.</iframe>';
+    }
+
 }
